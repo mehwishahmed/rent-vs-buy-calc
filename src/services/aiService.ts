@@ -214,7 +214,7 @@ export class AIService {
 
     if (lowerInput.includes('5 years') || lowerInput.includes('might move')) {
       return {
-        content: `5 years is actually a really interesting timeline. Most people think it's too short for buying, but that's not always true. The key factors are:\n\n1. Transaction costs (typically 6-8% of home value)\n2. Market appreciation in your area\n3. Rent growth vs mortgage stability\n\nWhat's making you think you might move? Job changes, family plans, or just keeping options open?`,
+        content: `Ah, 5 years is such a tricky timeline! I get this question all the time from clients. Here's the thing - it's not necessarily too short for buying, but it really depends on a few key factors.\n\nThe biggest one is transaction costs. When you buy and sell, you're looking at around 6-8% of the home value in costs. So on a $500k home, that's $30-40k right there.\n\nWhat's making you think you might move in 5 years? Job changes, family plans, or just wanting to keep your options open?`,
         showChart: false
       };
     }
@@ -262,9 +262,16 @@ export class AIService {
   }
 
   private extractNumber(input: string, keywords: string[]): number | null {
-    for (const keyword of keywords) {
-      const regex = new RegExp(`\\$?([0-9,]+(?:\\.[0-9]+)?)[kK]?`, 'i');
-      const match = input.match(regex);
+    // Look for numbers with various formats: $500k, $500,000, 500k, etc.
+    const patterns = [
+      /\$?(\d{1,3}(?:,\d{3})*(?:\.\d{2})?)\s*[kK]/i,  // $500k, 500K
+      /\$(\d{1,3}(?:,\d{3})*)/i,                      // $500,000
+      /(\d{1,3}(?:,\d{3})*)\s*(?:dollars?|bucks?)/i,  // 500000 dollars
+      /(\d{1,6})/i                                     // Just numbers
+    ];
+    
+    for (const pattern of patterns) {
+      const match = input.match(pattern);
       if (match) {
         let num = parseFloat(match[1].replace(/,/g, ''));
         if (input.toLowerCase().includes('k')) num *= 1000;
