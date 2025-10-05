@@ -183,7 +183,7 @@ export class AIService {
   }
 
   private generateFallbackResponse(userInput: string, context: UserContext): AIResponse {
-    // Truly intelligent AI that acts like a real financial advisor
+    // Natural, human-like responses when API isn't available
     const lowerInput = userInput.toLowerCase();
 
     // Extract key information from user input
@@ -192,10 +192,10 @@ export class AIService {
     const location = this.extractLocation(userInput);
     const timeline = this.extractTimeline(userInput);
 
-    // Generate intelligent, contextual responses
+    // Generate natural, conversational responses
     if (lowerInput.includes('denver') || lowerInput.includes('colorado')) {
       return {
-        content: `You know, Denver's market is absolutely fascinating right now. I've been tracking it closely for my clients - the median home price is around $745k, but here's what's really caught my attention: the rent growth rate has been outpacing the national average at about 7% annually. That's significant.\n\nWhat's your current situation? Are you renting now, and if so, what's your monthly rent? This will help me give you a much more targeted analysis that actually makes sense for your specific circumstances.`,
+        content: `Oh, Denver's market is wild right now! I've been working with clients there and the median home price is around $745k. What's really interesting is that rent growth has been crazy - like 7% annually. That's way above the national average.\n\nSo what's your current situation? Are you renting now? I'd love to help you figure out if buying makes sense for your specific situation.`,
         showChart: false
       };
     }
@@ -239,7 +239,7 @@ export class AIService {
 
     if (lowerInput.includes('help') || lowerInput.includes('confused') || lowerInput.includes('no idea')) {
       return {
-        content: `Perfect - that's exactly why I'm here. Most people feel lost with this decision, but it's actually more straightforward than you think.\n\nLet me ask you a few key questions to get us started:\n\n1. What's your current monthly rent?\n2. How long do you see yourself staying in your next home?\n3. What's your biggest priority - building wealth, flexibility, or stability?\n\nDon't worry about getting the "right" answers - just tell me what's on your mind. I'll help you think through this step by step.`,
+        content: `Hey, you're totally not alone in feeling overwhelmed by this decision. I've been helping people with this for years, and honestly, most people feel exactly like you do at first.\n\nHere's the thing - it's actually not as complicated as it seems once we break it down. Let me ask you a few quick questions to get us started:\n\nWhat's your current monthly rent? And how long do you think you'd stay in your next place? Don't worry about having perfect answers - just tell me what you're thinking.`,
         showChart: false
       };
     }
@@ -258,9 +258,9 @@ export class AIService {
       };
     }
 
-    // Default intelligent response
+    // Default natural response
     return {
-      content: `I'm getting a sense of your situation, but I need a bit more context to give you truly valuable advice.\n\nCan you tell me:\n- What's your current living situation (renting/owning)?\n- What's your monthly housing cost?\n- How long do you plan to stay in your next home?\n\nDon't worry about having all the answers - just share what you know, and I'll help you think through the rest.`,
+      content: `I'd love to help you figure this out! To give you advice that actually makes sense for your situation, I need to know a bit more about where you're at.\n\nAre you renting right now? And if so, what's your monthly rent? Also, how long do you think you'd stay in your next place? Just share whatever comes to mind - there's no wrong answer here.`,
       showChart: false
     };
   }
