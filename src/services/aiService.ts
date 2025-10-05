@@ -29,16 +29,12 @@ export class AIService {
   private baseUrl: string;
 
   constructor() {
-    // Using Anthropic Claude - better for conversational financial advice
-    this.apiKey = process.env.NEXT_PUBLIC_CLAUDE_API_KEY || '';
-    this.baseUrl = 'https://api.anthropic.com/v1';
+    // API calls go through our server-side route for security
+    this.apiKey = ''; // Not used - all calls go through /api/chat
+    this.baseUrl = '/api/chat'; // Use our internal API route
     
-    console.log('🔧 AIService initialized with Claude:');
-    console.log('🔑 API Key loaded:', this.apiKey ? 'YES' : 'NO');
-    console.log('🔑 API Key length:', this.apiKey.length);
-    console.log('🌐 Base URL:', this.baseUrl);
-    console.log('🔍 All env vars with CLAUDE:', Object.keys(process.env).filter(key => key.includes('CLAUDE')));
-    console.log('🔍 All env vars with NEXT_PUBLIC:', Object.keys(process.env).filter(key => key.includes('NEXT_PUBLIC')));
+    console.log('🔧 AIService initialized - using server-side API route for security');
+    console.log('🌐 API calls will go through:', this.baseUrl);
   }
 
   // Comprehensive chart revelation system
@@ -141,7 +137,7 @@ export class AIService {
       console.log('📈 Chart Revelation:', chartRevelation);
       console.log('📋 Follow-up questions in chart revelation:', chartRevelation.followUpQuestions);
       
-      const response = await fetch('/api/chat', {
+      const response = await fetch(this.baseUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
