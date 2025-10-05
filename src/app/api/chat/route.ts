@@ -8,6 +8,8 @@ export async function POST(request: NextRequest) {
     
     console.log('🔧 API Route - API Key loaded:', apiKey ? 'YES' : 'NO');
     console.log('🔧 API Route - API Key length:', apiKey?.length || 0);
+    console.log('🔧 API Route - API Key preview:', apiKey ? `${apiKey.substring(0, 10)}...` : 'NONE');
+    console.log('🔧 API Route - All env vars:', Object.keys(process.env).filter(key => key.includes('CLAUDE')));
     
     if (!apiKey) {
       console.log('❌ API Route - No API key found');
